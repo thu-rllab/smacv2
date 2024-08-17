@@ -14,6 +14,7 @@ import numpy as np
 import random
 import enum
 import math
+import subprocess
 from absl import logging
 from pysc2.lib.units import Neutral, Protoss, Terran, Zerg
 
@@ -439,7 +440,7 @@ class StarCraft2Env(MultiAgentEnv):
         # Setting up the interface
         interface_options = sc_pb.InterfaceOptions(raw=True, score=False)
         self._sc2_proc = self._run_config.start(
-            window_size=self.window_size, want_rgb=False
+            window_size=self.window_size, want_rgb=False, stderr=subprocess.DEVNULL
         )
         self._controller = self._sc2_proc.controller
 
